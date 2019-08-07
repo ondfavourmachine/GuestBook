@@ -38,7 +38,6 @@ export class AppComponent implements OnInit{
   }
 
   updateGuest(action?: string, index?:number, guest?: guestBook,): void{
-    debugger
     if(!action){
       this.edit = true;
       this.guestBookForm.patchValue(guest);
@@ -46,8 +45,7 @@ export class AppComponent implements OnInit{
       return
     }
     else if(action){
-      console.log(this.guestBookForm);
-      this.arrOfGuests.splice(1, this.currentIndex);
+      this.arrOfGuests.splice(this.currentIndex, 1);
       this.arrOfGuests.splice(this.currentIndex, 0, this.guestBookForm.value);
       this.edit = false;
       this.guestBookForm.reset();
