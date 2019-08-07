@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
@@ -12,7 +12,7 @@ interface guestBook{
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'GuestbookApp';
   arrOfGuests: Array<guestBook> = []
   edit: boolean = false;
@@ -23,6 +23,9 @@ export class AppComponent {
   })
   constructor(private fb: FormBuilder){}
 
+  ngOnInit(){
+  
+  }
   addGuestBook(action?: string): void{
     if(this.guestBookForm.value && !action){
       this.arrOfGuests.push(this.guestBookForm.value);
@@ -36,7 +39,7 @@ export class AppComponent {
   }
 
   updateGuest(guest?: guestBook, index?:number, action?: string): void{
-    if(!action && index){
+    if(!action){
       this.edit = true;
       this.guestBookForm.patchValue(guest);
       this.currentIndex = index;

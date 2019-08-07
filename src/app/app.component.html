@@ -37,7 +37,7 @@
         </div>
         
         <button [disabled]="!guestBookForm.valid" *ngIf="!edit" (click)="addGuestBook()" type="submit" class="btn btn-primary">Submit</button>
-        <button *ngIf="edit" (click)="updateGuest('edit')" type="submit" class="btn btn-primary">Update</button>
+        <button *ngIf="edit" (click)="updateGuest(undefined, undefined, 'edit')" type="button" class="btn btn-primary">Update</button>
       </form>
       <p>{{ arrOfGuests | json}}</p>
     </div>
@@ -59,8 +59,8 @@
               <td>{{guest.name}}</td>
               <td>{{guest.phoneNumber}}</td>
               <td>
-                <span (click)="updateGuest(guest, i)"> <i class="fa fa-edit mr-1"></i> </span>
-                <span (click)="deleteGuest(guest, i)"> <i class="fa fa-trash"></i> </span>
+                <span (click)="updateGuest(guest, i)"> <i class="fa fa-edit mr-3"></i> </span>
+                <span (click)="deleteGuest(i)"> <i class="fa fa-trash"></i> </span>
               </td>
             </tr>
             
