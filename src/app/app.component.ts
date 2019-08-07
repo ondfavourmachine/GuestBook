@@ -33,22 +33,25 @@ export class AppComponent implements OnInit{
     else if(action){
       console.log(action, this.guestBookForm.value);
       this.edit = false;
-     
     }
     this.guestBookForm.reset();
   }
 
-  updateGuest(guest?: guestBook, index?:number, action?: string): void{
+  updateGuest(action?: string, index?:number, guest?: guestBook,): void{
+    debugger
     if(!action){
       this.edit = true;
       this.guestBookForm.patchValue(guest);
       this.currentIndex = index;
       return
     }
-    this.arrOfGuests.splice(1, this.currentIndex);
-    this.arrOfGuests.splice(1, 0, this.guestBookForm.value);
-    this.edit = false;
-    this.guestBookForm.reset();
+    else if(action){
+      console.log(this.guestBookForm);
+      this.arrOfGuests.splice(1, this.currentIndex);
+      this.arrOfGuests.splice(this.currentIndex, 0, this.guestBookForm.value);
+      this.edit = false;
+      this.guestBookForm.reset();
+    }
 
   }
 
