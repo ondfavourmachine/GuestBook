@@ -1,5 +1,5 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
+<!-- <div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
   </h1>
@@ -16,5 +16,58 @@
   <li>
     <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
   </li>
-</ul>
+</ul> -->
+
+
+<div class="container">
+  <div class="row pt-3">
+    <div class="col-md-6">
+      <form [formGroup]="guestBookForm">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Name of Guest</label>
+          <input formControlName="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
+         
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Phone</label>
+          <input formControlName="phoneNumber" type="number" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          <small style="color: tomato" *ngIf="guestBookPhone.touched && guestBookPhone.invalid" class="ng-invalid ng-touched">
+            The phone numnbe must be more than 3
+          </small>
+        </div>
+        
+        <button [disabled]="!guestBookForm.valid" *ngIf="!edit" (click)="addGuestBook()" type="submit" class="btn btn-primary">Submit</button>
+        <button *ngIf="edit" (click)="updateGuest('edit')" type="submit" class="btn btn-primary">Update</button>
+      </form>
+      <p>{{ arrOfGuests | json}}</p>
+    </div>
+
+    <div class="col-md-6 text-white" style="min-height: 100px; background-color: black;">
+      <ng-container>
+        <table class="table">
+          <thead>
+            <tr class="text-white">
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Phone Number</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="text-white" *ngFor="let guest of arrOfGuests; index as i">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{guest.name}}</td>
+              <td>{{guest.phoneNumber}}</td>
+              <td>
+                <span (click)="updateGuest(guest, i)"> <i class="fa fa-edit mr-1"></i> </span>
+                <span (click)="deleteGuest(guest, i)"> <i class="fa fa-trash"></i> </span>
+              </td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </ng-container>
+    </div>
+  </div>
+</div>
 
